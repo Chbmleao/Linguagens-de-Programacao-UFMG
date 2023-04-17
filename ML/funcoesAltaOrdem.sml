@@ -70,5 +70,5 @@ convert [(1, 2), (3, 4), (5, 6)];
 fun myMap f = fn L => foldr(fn (e, newList) => f(e)::newList) [] L;
 myMap (fn e => e * e) ([1, 2, 3]);
 
-fun eval L = fn x => foldr(fn (e, (p, result)) => (x * p, result + e * p)) (1, 0) L;
-eval([1.0, 5.0, 3.0], 2.0);
+fun eval L = fn x => #2 (foldl(fn (e, (p, result)) => (x * p, e * p + result)) (1.0, 0.0) L);
+eval [1.0, 5.0, 3.0] 2.0;
