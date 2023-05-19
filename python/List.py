@@ -42,11 +42,25 @@ class List:
         cell = self.start
         while cell != 0:
             if cell.head == n:
-                print(cell.head)
                 return True
             cell = cell.tail
 
         return False
+
+    def equals(self, list):
+        """Returns true if this list is equal to another list"""
+        if self.length() != list.length():
+            return False
+
+        cell1 = self.start
+        cell2 = list.start
+        while cell1 != 0 and cell2 != 0:
+            if cell1.head != cell2.head:
+                return False
+            cell1 = cell1.tail
+            cell2 = cell2.tail
+
+        return True
 
 
 def test():
