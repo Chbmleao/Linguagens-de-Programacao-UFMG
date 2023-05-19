@@ -42,6 +42,30 @@ class Stack:
         return self.top.n != 0
 
 
+class Queue:
+    """Describes a queue data type."""
+
+    def __init__(self):
+        self.first = Node()
+        self.last = self.first
+
+    def add(self, element):
+        """Adds a new element into this list."""
+        self.last.e = element
+        aux = Node()
+        self.last.n = aux
+        self.last = aux
+
+    def remove(self):
+        """Removes the next element from this list."""
+        self.first = self.first.n
+        return self.first.e
+
+    def hasMore(self):
+        """Returns True if this list is not empty."""
+        return self.first.n != 0
+
+
 def removeAll(s):
     """Removes all the elements from the data structure."""
     while s.hasMore():
