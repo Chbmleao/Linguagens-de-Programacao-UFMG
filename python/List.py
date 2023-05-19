@@ -79,6 +79,16 @@ class List:
 
         return retList
 
+    def auxRecursiveAppend(self, cell):
+        if cell == 0:
+            print(self.__str__())
+            return self
+        retList = self.auxRecursiveAppend(cell.tail)
+        return retList.cons(cell.head)
+
+    def recursiveAppend(self, list):
+        return self.auxRecursiveAppend(list.start)
+
     def reverse(self):
         retList = List(0)
         cell = self.start
@@ -125,10 +135,6 @@ class List:
             swapped = False
 
             while nextCell != 0:
-                print("prevCell", prevCell.head)
-                print("currCell", currCell.head)
-                print("nextCell", nextCell.head)
-                print("antes: ", self.__str__())
                 if currCell.head > nextCell.head:
                     currCell.tail = nextCell.tail
                     nextCell.tail = currCell
@@ -142,9 +148,6 @@ class List:
                     nextCell = aux
 
                     swapped = True
-
-                print("depois: ", self.__str__())
-                print()
 
                 prevCell = prevCell.tail
                 currCell = currCell.tail
