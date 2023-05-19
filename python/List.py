@@ -1,3 +1,6 @@
+import sys
+
+
 class ConsCell:
     def __init__(self, h, t):
         """Creates a new cell with head == h, and tail == t."""
@@ -76,6 +79,77 @@ class List:
 
         return retList
 
+    def reverse(self):
+        retList = List(0)
+        cell = self.start
+        while cell != 0:
+            retList = retList.cons(cell.head)
+            cell = cell.tail
+
+        return retList
+
+    def sort(self, comp=lambda x, y: x < y):
+        retList = List(0)
+        inserted = []
+        while retList.length() < self.length():
+            cell = self.start
+            minor = sys.maxsize
+            while cell != 0:
+                if comp(cell.head, minor) and cell.head not in inserted:
+                    minor = cell.head
+                cell = cell.tail
+
+            retList = retList.cons(minor)
+            inserted.append(minor)
+
+        return retList
+
+    def sortMe(self):
+        if self.length() == 1:
+            return
+
+        firstCell = self.start
+        secondCell = firstCell.tail
+        if firstCell.head > secondCell.head:
+            firstCell.tail = secondCell.tail
+            secondCell.tail = firstCell
+            self.start = secondCell
+        if self.length() == 2:
+            return
+
+        swapped = True
+        while swapped:
+            prevCell = self.start
+            currCell = prevCell.tail
+            nextCell = currCell.tail
+            swapped = False
+
+            while nextCell != 0:
+                print("prevCell", prevCell.head)
+                print("currCell", currCell.head)
+                print("nextCell", nextCell.head)
+                print("antes: ", self.__str__())
+                if currCell.head > nextCell.head:
+                    currCell.tail = nextCell.tail
+                    nextCell.tail = currCell
+                    prevCell.tail = nextCell
+
+                    if currCell == self.start:
+                        self.start = nextCell
+
+                    aux = currCell
+                    currCell = nextCell
+                    nextCell = aux
+
+                    swapped = True
+
+                print("depois: ", self.__str__())
+                print()
+
+                prevCell = prevCell.tail
+                currCell = currCell.tail
+                nextCell = nextCell.tail
+
 
 def test():
     a = List(0)
@@ -84,12 +158,19 @@ def test():
     d = b.cons(True)
     e = d.cons(False)
     f = d.append(e)
+    g = f.reverse()
+    h = b.cons(10)
+    h = h.cons(1)
+    h = h.cons(7)
+    h.sortMe()
     print("List a = ", a.__str__(), " Length(a) = ", a.length())
     print("List b = ", b.__str__(), " Length(b) = ", b.length())
     print("List c = ", c.__str__(), " Length(c) = ", c.length())
     print("List d = ", d.__str__(), " Length(d) = ", d.length())
     print("List e = ", e.__str__(), " Length(e) = ", e.length())
     print("List f = ", f.__str__(), " Length(f) = ", f.length())
+    print("List g = ", g.__str__(), " Length(g) = ", g.length())
+    print("List h = ", h.__str__(), " Length(g) = ", h.length())
 
 
 test()
