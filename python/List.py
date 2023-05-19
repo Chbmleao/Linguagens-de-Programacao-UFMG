@@ -37,6 +37,17 @@ class List:
         ans = ans + "]"
         return ans
 
+    def contains(self, n):
+        """Returns true if this list contains n else false"""
+        cell = self.start
+        while cell != 0:
+            if cell.head == n:
+                print(cell.head)
+                return True
+            cell = cell.tail
+
+        return False
+
 
 def test():
     a = List(0)
