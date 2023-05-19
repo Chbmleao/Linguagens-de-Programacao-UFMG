@@ -62,6 +62,20 @@ class List:
 
         return True
 
+    def append(self, list):
+        """Returns this list appended to another list"""
+        retList = self
+        auxArr = []
+        cell = list.start
+        while cell != 0:
+            auxArr.append(cell.head)
+            cell = cell.tail
+
+        for i in reversed(range(len(auxArr))):
+            retList = retList.cons(auxArr[i])
+
+        return retList
+
 
 def test():
     a = List(0)
@@ -69,11 +83,13 @@ def test():
     c = b.cons("Hi!")
     d = b.cons(True)
     e = d.cons(False)
+    f = d.append(e)
     print("List a = ", a.__str__(), " Length(a) = ", a.length())
     print("List b = ", b.__str__(), " Length(b) = ", b.length())
     print("List c = ", c.__str__(), " Length(c) = ", c.length())
     print("List d = ", d.__str__(), " Length(d) = ", d.length())
     print("List e = ", e.__str__(), " Length(e) = ", e.length())
+    print("List f = ", f.__str__(), " Length(f) = ", f.length())
 
 
 test()
