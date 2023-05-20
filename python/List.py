@@ -1,4 +1,5 @@
 import sys
+import math
 
 
 class ConsCell:
@@ -98,6 +99,23 @@ class List:
 
         return retList
 
+    def reverseMe(self):
+        n = self.length()
+        middle = math.floor(n / 2)
+        cell1 = self.start
+        cell2 = self.start
+
+        for i in range(middle):
+            for j in range(n - 1):
+                cell2 = cell2.tail
+
+            aux = cell1.head
+            cell1.head = cell2.head
+            cell2.head = aux
+            n -= 1
+            cell1 = cell1.tail
+            cell2 = self.start
+
     def sort(self, comp=lambda x, y: x < y):
         retList = List(0)
         inserted = []
@@ -161,18 +179,17 @@ def test():
     d = b.cons(True)
     e = d.cons(False)
     f = d.append(e)
-    g = f.reverse()
     h = b.cons(10)
     h = h.cons(1)
     h = h.cons(7)
-    h.sortMe()
+    h.reverseMe()
     print("List a = ", a.__str__(), " Length(a) = ", a.length())
     print("List b = ", b.__str__(), " Length(b) = ", b.length())
     print("List c = ", c.__str__(), " Length(c) = ", c.length())
     print("List d = ", d.__str__(), " Length(d) = ", d.length())
     print("List e = ", e.__str__(), " Length(e) = ", e.length())
     print("List f = ", f.__str__(), " Length(f) = ", f.length())
-    print("List g = ", g.__str__(), " Length(g) = ", g.length())
+    # print("List g = ", g.__str__(), " Length(g) = ", g.length())
     print("List h = ", h.__str__(), " Length(g) = ", h.length())
 
 
